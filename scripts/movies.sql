@@ -50,8 +50,17 @@ LIMIT 1;
 -- Toy Story 4
 
 
--- 4. Write a query that returns, for each distributor in the distributors table, the distributor name and the number of movies associated with that distributor in the movies 
--- table. Your result set should include all of the distributors, whether or not they have any movies in the movies table.
+-- 4. Write a query that returns, for each distributor in the distributors table, the distributor name and the number of movies associated with that distributor in the movies table. Your result set should include all of the distributors, whether or not they have any movies in the movies table.
+
+SELECT company_name as company, COUNT(film_title) as movie_count
+FROM distributors as d
+LEFT JOIN specs as s
+ON d.distributor_id = s.domestic_distributor_id
+GROUP BY company;
+
+SELECT *
+FROM distributors;
+
 
 -- 5. Write a query that returns the five distributors with the highest average movie budget.
 
