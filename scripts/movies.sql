@@ -39,6 +39,15 @@ LIMIT 1;
 
 -- 3. What is the highest grossing G-rated movie? Which company distributed it?
 
+SELECT film_title
+FROM specs as s
+JOIN revenue as r
+ON s.movie_id = r.movie_id
+WHERE mpaa_rating = 'G'
+ORDER BY worldwide_gross DESC
+LIMIT 1;
+
+-- Toy Story 4
 
 
 -- 4. Write a query that returns, for each distributor in the distributors table, the distributor name and the number of movies associated with that distributor in the movies 
