@@ -22,7 +22,7 @@ ON s.movie_id = r.movie_id
 ORDER BY worldwide_gross
 LIMIT 1;
 
-Semi-Tough is the lowest grossing movie worldwide
+--Semi-Tough is the lowest grossing movie worldwide
 
 
 -- 2. What year has the highest average imdb rating?
@@ -58,9 +58,6 @@ LEFT JOIN specs as s
 ON d.distributor_id = s.domestic_distributor_id
 GROUP BY company;
 
-SELECT *
-FROM distributors;
-
 
 -- 5. Write a query that returns the five distributors with the highest average movie budget.
 
@@ -69,10 +66,12 @@ FROM distributors as d
 JOIN specs as s
 ON d.distributor_id = s.domestic_distributor_id
 JOIN revenue as r
-ON s.movie_id = r.movie_id
+USING(movie_id)
 GROUP BY company
 ORDER BY avg_budget DESC
 LIMIT 5;
+
+--highest avg budget companies are Disney, Sony, Lionsgate, DreamWorks, and Warner Bros
 
 -- 6. How many movies in the dataset are distributed by a company which is not headquartered in California? Which of these movies has the highest imdb rating?
 
@@ -86,9 +85,7 @@ WHERE headquarters NOT LIKE '%CA%'
 GROUP BY film_title, company_name, imdb_rating, headquarters
 ORDER BY imdb_rating DESC;
 
-SELECT company_name
-FROM distributors
-WHERE headquarters NOT LIKE '%CA%';
+--Dirty Dancing has the highest rating of the two films that weren't made in California
 
 -- 7. Which have a higher average rating, movies which are over two hours long or movies which are under two hours?
 
@@ -104,6 +101,8 @@ FROM rating
 JOIN specs
 USING(movie_id)
 WHERE length_in_min < 120;
+
+--Movies over 2 hours have a higher avg rating than movies under 2 hrs.
 
 
 
