@@ -91,3 +91,19 @@ FROM distributors
 WHERE headquarters NOT LIKE '%CA%';
 
 -- 7. Which have a higher average rating, movies which are over two hours long or movies which are under two hours?
+
+SELECT 
+	ROUND(AVG(imdb_rating),2) as avg_rating_under2,
+	(SELECT 
+	 	ROUND(AVG(imdb_rating),2)
+	FROM rating
+	JOIN specs
+	USING(movie_id)
+	WHERE length_in_min > 120) as avg_rating_over2
+FROM rating
+JOIN specs
+USING(movie_id)
+WHERE length_in_min < 120;
+
+
+
