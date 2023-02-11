@@ -22,10 +22,24 @@ ON s.movie_id = r.movie_id
 ORDER BY worldwide_gross
 LIMIT 1;
 
+Semi-Tough is the lowest grossing movie worldwide
+
 
 -- 2. What year has the highest average imdb rating?
 
+SELECT film_title, ROUND(AVG(r.imdb_rating),2) as avg_rating
+FROM specs as s
+JOIN rating as r
+ON s.movie_id = r.movie_id
+GROUP BY film_title
+ORDER BY avg_rating DESC
+LIMIT 1;
+
+-- The Dark Knight
+
 -- 3. What is the highest grossing G-rated movie? Which company distributed it?
+
+
 
 -- 4. Write a query that returns, for each distributor in the distributors table, the distributor name and the number of movies associated with that distributor in the movies 
 -- table. Your result set should include all of the distributors, whether or not they have any movies in the movies table.
