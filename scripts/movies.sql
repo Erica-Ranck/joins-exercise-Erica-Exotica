@@ -64,6 +64,16 @@ FROM distributors;
 
 -- 5. Write a query that returns the five distributors with the highest average movie budget.
 
+SELECT company_name as company, ROUND(AVG(film_budget),2) as avg_budget
+FROM distributors as d
+JOIN specs as s
+ON d.distributor_id = s.domestic_distributor_id
+JOIN revenue as r
+ON s.movie_id = r.movie_id
+GROUP BY company
+ORDER BY avg_budget DESC
+LIMIT 5;
+
 -- 6. How many movies in the dataset are distributed by a company which is not headquartered in California? Which of these movies has the highest imdb rating?
 
 -- 7. Which have a higher average rating, movies which are over two hours long or movies which are under two hours?
