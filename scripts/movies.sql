@@ -27,27 +27,31 @@ LIMIT 1;
 
 -- 2. What year has the highest average imdb rating?
 
-SELECT film_title, ROUND(AVG(r.imdb_rating),2) as avg_rating
+SELECT release_year, ROUND(AVG(r.imdb_rating),2) as avg_rating
 FROM specs as s
 JOIN rating as r
 ON s.movie_id = r.movie_id
-GROUP BY film_title
+GROUP BY release_year
 ORDER BY avg_rating DESC
 LIMIT 1;
 
--- The Dark Knight
+-- 1991
 
 -- 3. What is the highest grossing G-rated movie? Which company distributed it?
 
-SELECT film_title
+SELECT 
+	film_title,
+	company_name
 FROM specs as s
 JOIN revenue as r
 ON s.movie_id = r.movie_id
+JOIN distributors
+ON distributor_id = domestic_distributor_id
 WHERE mpaa_rating = 'G'
 ORDER BY worldwide_gross DESC
 LIMIT 1;
 
--- Toy Story 4
+-- Toy Story 4 / Walt Disney
 
 
 -- 4. Write a query that returns, for each distributor in the distributors table, the distributor name and the number of movies associated with that distributor in the movies table. Your result set should include all of the distributors, whether or not they have any movies in the movies table.
